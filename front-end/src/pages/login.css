@@ -1,0 +1,99 @@
+html{
+    background: radial-gradient(circle at bottom,rgb(1, 7, 33) ,rgb(12, 15, 23),  rgb(8, 24, 76)100%);
+    height: 100vh;
+}
+body{
+    font-family: 'Arvo', serif;
+}
+
+
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-100px);
+    color: white;
+    backdrop-filter: blur(10px);
+    
+}
+
+
+
+.card{
+    display: block;
+    text-align: center;
+    width: 280px;
+    height: 280px;
+    border: 3px solid white;
+    border-radius: 12px;
+    transition: transform  .5s ease, border 0.2s ease;
+}
+.card:hover{
+    transform: scale(1.05);
+    border: 4px solid;
+}
+
+.form{
+    padding-bottom: 20px;
+}
+
+
+input{
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    margin: 5px;
+    font-family: 'Arvo', serif;
+    text-indent: 10px;
+}
+
+input:focus{
+    outline: none;
+}
+
+a{  
+    font-family: 'Arvo', serif;
+    color: white;
+    text-decoration: underline;
+}
+.register_link{
+    margin-top: 5px;
+}
+
+.submit_button{
+    font-family: 'Arvo', serif;
+    height: 30px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 3px;
+    transition: width .5s ease, color 0.4s ease, background-color .4s ease;
+}
+
+.submit_button:hover{
+    width: 135px;
+    background-color: rgb(3, 55, 145);
+    color: white;
+    border: 2px solid white;
+}
+.navbar{
+    color: white;
+    background: radial-gradient(circle at top,rgb(3, 48, 127), rgb(1, 7, 33) 90%);
+    border-bottom: 2px solid white;
+    border-top: 2px solid black;
+    width: 100%;
+    height: 50px;
+    
+    
+}
+span{
+    transform: translateY(6px);
+    margin-right: 5px;
+}
