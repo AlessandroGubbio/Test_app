@@ -1,36 +1,20 @@
 import React, { useState } from 'react'
 import './register.css'
 import axios from 'axios';
+import Navbar from './Navbar'
 import { useNavigate } from 'react-router-dom'
+import BackAnim from './BackAnim';
 
 const Register = () => {
     const[username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [mail, setMail] = useState('')
     const navigate = useNavigate()
-    
-    const home = ()=>{
-        navigate('/Login')
-      }
-    const logout= ()=>{
-        alert('you need to be logged in to logout')
-      }
+
       
     return (
     <>
-    <div className='navbar'>
-      <a className='home_btn'>
-      <span onClick={home} class="material-symbols-outlined">
-        home
-      </span>
-      </a>
-      <h4 className='nav_title'>JOIN OUR FAMILY</h4>
-      <a className='logout_btn'>
-      <span onClick={logout} class="material-symbols-outlined">
-        logout
-      </span>
-      </a>
-    </div>
+    <Navbar />
     <div className='login'>
         <div className='container'>
           <div className='card'>
@@ -60,6 +44,7 @@ const Register = () => {
           </div>
         </div>
     </div>
+    <BackAnim />
     </>
   )
 }

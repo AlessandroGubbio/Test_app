@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import Navbar from './Navbar';
 import './login.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import BackAnim from './BackAnim';
 
 
 
@@ -19,12 +21,6 @@ const Login = () => {
     }
   }
   
-  const home = ()=>{
-    window.location.reload();
-  }
-  const logout= ()=>{
-    alert('you need to be logged in to logout')
-  }
   const register = ()=>{
     navigate('/Register')
   }
@@ -32,19 +28,7 @@ const Login = () => {
   
   return (
     <>
-    <div className='navbar'>
-      <a className='home_btn'>
-      <span onClick={home} class="material-symbols-outlined">
-        home
-      </span>
-      </a>
-      <h4 className='nav_title'>WELCOME TO OUR SITE</h4>
-      <a className='logout_btn'>
-      <span onClick={logout} class="material-symbols-outlined">
-        logout
-      </span>
-      </a>
-    </div>
+    <Navbar/>
     <div className='login'>
         <div className='container'>
           <div className='card'>
@@ -71,6 +55,8 @@ const Login = () => {
           </div>
         </div>
     </div>
+    <BackAnim />
+
     </>
   )
 }
