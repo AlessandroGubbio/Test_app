@@ -1,20 +1,18 @@
 const express = require('express')
 const app = express()
+const os = require('os')
 const client = require('./database')
 const jwt = require('jsonwebtoken')
 
 app.use(express.json());
 
-
+// CRUD operations
 app.post('/login', async (req, res) => {
     try {
         const {username, password} = req.body;
   
         const validateUser = client.query("SELECT username, password FROM users WHERE username = $1 AND password = $2", [username, password]);
         if ((await validateUser).rows.length > 0) {
-            const token = jwt.sign(
-
-            )
             res.json({ success: true, message: 'Login successful' });
         } else {
             res.status(401).json({ success: false, message: 'Invalid username or password' });
@@ -25,11 +23,35 @@ app.post('/login', async (req, res) => {
     }
   });
 
-  app.get('/', (req, res)=>{
+
+
+// APIs
+app.get('/', (req, res)=>{
     res.send("Welcome to the User API")
   })
   
+app.get("/cpu", (req, res)=>{
 
+    const numberCpus = os.availableParallelism()
+  
+    const cpuUsage = os.cpus();
+  
+    const totalNonIdleTime = cpuUsage.reduce((total, core) => {
+        return total + core.times.user + core.times.nice + core.times.sys;
+    }, 0);
+  
+    const totalCpuTime = cpuUsage.reduce((total, core) => {
+        return total + core.times.user + core.times.nice + core.times.sys + core.times.idle;
+    }, 0);
+  
+    const usedCpu = ((totalNonIdleTime / totalCpuTime) * 100).toFixed(2);
+  
+  
+    
+    const totalCpu = (totalCpuTime).toFixed(2) //GHz
+  
+    res.json({"numberCpu": numberCpus, "totCpus": totalCpu, "cpuUsage": usedCpu})
+  });
 
 
 

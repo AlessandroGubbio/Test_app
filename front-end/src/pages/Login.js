@@ -51,12 +51,13 @@ const Login = () => {
               </div> 
               <div className='register_link'>
                 <a onClick={register}>Register</a>
-              </div>        
+              </div> 
+                     
           </div>
         </div>
     </div>
     <BackAnim />
-
+    
     </>
   )
 }
