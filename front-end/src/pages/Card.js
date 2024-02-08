@@ -75,7 +75,27 @@ const Card = (props) => {
         })
       }
     
-    
+    // definire ramWiew
+
+
+    const RamView = (props) =>{
+      const { beData } = props;
+    if (!beData) {
+      return null; // Handle case where beData is not available
+    }
+  
+    return (
+      <div style={{ visibility: props.hide ? 'visible' : 'hidden' }} className='box'>
+      <div className='ram_box'>
+          <div className='ram_info'>
+            <p className='info'>- Total Ram: </p>
+            <p className='info_n'>{beData.totalRam} Gb</p>
+            <p className='info'>- Ram usage: </p> 
+            <p className='info_n'>{beData.useRam} Gb</p>
+          </div>
+        </div>
+      </div>
+    )}
 
   return (
     <>
@@ -96,9 +116,10 @@ const Card = (props) => {
       {hide && beData && (
         props.click === 'cpu_fun' ? (
         <CpuView beData={beData} hide={hide} />
-        ) : (
+        ) :  props.click === 'ram_fun' ? (
         <RamView beData={beData} hide={hide} />
-        ))}
+        ): null
+        )}
     </>
   )
 }

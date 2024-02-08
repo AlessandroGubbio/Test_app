@@ -13,6 +13,7 @@ const Main = (props) => {
 
 
   const [beData, setBeData] = useState(null);
+  const [beRam, setBeRam] = useState(null);
   const cpu_desc = "The CPU is a complex set of electronic circuitry that runs the machine's operating system and apps. "
   +"The CPU interprets, processes and executes instructions, most often from the hardware and softwareprograms running on the device."
 
@@ -25,12 +26,19 @@ const Main = (props) => {
       .catch(err => console.error(err));
   }, []);
 
+  useEffect(() => {
+    axios.get("/ram")
+      .then(res => setBeRam(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
+
   return (
     <>
     <Navbar />  
     <div className='cards_container'>
       <Card img={cpu} title="The CPU" description={cpu_desc} name="cpu" click="cpu_fun" beData={beData} />
-      {/* <Card img={ram} title="The RAM" description={ram_desc} name="ram" click="ram_fun"/> */}
+      <Card img={ram} title="The RAM" description={ram_desc} name="ram" click="ram_fun" beData={beRam}/>
     </div>
     <BackAnim />
     </>
