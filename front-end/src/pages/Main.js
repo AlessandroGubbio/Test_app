@@ -1,81 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './main.css'
 import BackAnim from './BackAnim'
 import Navbar from './Navbar'
-import cpu from './cpu.png'
-import axios from 'axios';
-import { useState } from 'react';
+import cpu from '../images/cpu.png'
+import ram from '../images/ram.jpg'
+import Card from './Card'
+import axios from 'axios'
 
 
 
-const Main = () => {
-  const [beData,setBeData] = useState() 
-  const [btnText,setBtnText] = useState('Show') 
-
-  const [hide, setHide] = useState(false) 
-
-  function handleClick (){
-    setBtnText(btnText === 'Show' ? 'Hide' : 'Show');
-};
+const Main = (props) => {
 
 
+  const [beData, setBeData] = useState(null);
+  const cpu_desc = "The CPU is a complex set of electronic circuitry that runs the machine's operating system and apps. "
+  +"The CPU interprets, processes and executes instructions, most often from the hardware and softwareprograms running on the device."
 
-  function cpuInfo(){
-    axios.get("/cpu") // call to the backend api where the info is stored
-    .then(res =>{     // if the callback is succesfull (res.data to get the json received from the backend)
-      setBeData(res.data)
-      setHide(!hide)  // set the useState to true so that the info gets shown
-      console.log(res.data)
-    }).catch(err=>{   // if there's an error in the callback
-      console.log(err)
-    })
-  }
+  const ram_desc = " The term RAM stands for random-access memory. In essence, it is a computer's short-term memory. "
+  +" It's where the data is stored that your computer processor needs to run your applications and open your files."
 
-  function renderCPU(){
-    cpuInfo();
-    handleClick()
-  }
-
-
+  useEffect(() => {
+    axios.get("/cpu")
+      .then(res => setBeData(res.data))
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <>
-    <Navbar />
+    <Navbar />  
     <div className='cards_container'>
-      <div className='info_container'>
-        <div className='image_container'>
-          <img className='image' src={cpu} alt='cpu'></img>
-        </div>
-        <div className='text_container'>
-          <p className='card_title'>The CPU</p>
-          <p className='description'>
-            The CPU is a complex set of electronic circuitry that runs the machine's 
-            operating system and apps. The CPU interprets, processes and executes instructions, most often from the hardware and software
-            programs running on the device.
-          </p>
-        </div>
-        <p className='description'> Click here to view the Server's cpu information </p>
-        <div className='btn_container'>
-          <button className='show_btn' onClick={renderCPU}>{btnText}</button>
-        </div>
-      </div>
-      {hide && beData && ( 
-        <div className='box'>
-          <div className='cpu_info'>
-            <p className='info'>Number of Cpus available:</p>
-            <p className='info_n'>{beData.numberCpu}</p>
-            <br/>
-            <p className='info'>Total number Cpu available: </p>
-            <p className='info_n'>{beData.totCpus}</p>
-            <br/>
-            <p className='info'>Percentage of Cpu being used :</p>
-            <p className='info_n'>{beData.cpuUsage}%</p>
-            <br/>
-          </div>
-        </div>
-        )
-      }
-
+      <Card img={cpu} title="The CPU" description={cpu_desc} name="cpu" click="cpu_fun" beData={beData} />
+      {/* <Card img={ram} title="The RAM" description={ram_desc} name="ram" click="ram_fun"/> */}
     </div>
     <BackAnim />
     </>

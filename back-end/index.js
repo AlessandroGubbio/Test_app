@@ -53,6 +53,12 @@ app.get("/cpu", (req, res)=>{
     res.json({"numberCpu": numberCpus, "totCpus": totalCpu, "cpuUsage": usedCpu})
   });
 
+  app.get("/ram", (req, res)=>{
+    const totalRam = (os.totalmem()/1073741824).toFixed(2) //Gb
+    const useRam = ((os.totalmem() - os.freemem())/1073741824).toFixed(2) //Gb
+  
+    res.json({"totalRam": totalRam, "useRam": useRam})
+  });
 
 
 const port = 5000;

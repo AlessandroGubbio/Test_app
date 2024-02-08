@@ -1,19 +1,25 @@
 import React, { useState } from 'react'
 import './navbar.css'
-import {  useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+
+import { useNavigate } from 'react-router-dom'
 
 const Nabar = () => {
   
-  const [title, setTitle] = useState('');
+  const location = useLocation().pathname
+  const navigate = useNavigate()
   
   const home = ()=>{
-    window.location.reload();
+    if(location==="/Login" || location==="/Main"){
+      window.location.reload();
+    }else{
+      navigate('/Login')
+    }
   }
   const logout= ()=>{
     alert('you need to be logged in to logout')
   }
   
-  const location = useLocation().pathname
   
   function Title(){
     if(location === '/Login'){
