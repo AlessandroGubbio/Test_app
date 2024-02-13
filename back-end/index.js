@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const os = require('os')
 const client = require('./database')
+const {exec} = require("child_process");
 const jwt = require('jsonwebtoken')
 
 app.use(express.json());
@@ -53,12 +54,22 @@ app.get("/cpu", (req, res)=>{
     res.json({"numberCpu": numberCpus, "totCpus": totalCpu, "cpuUsage": usedCpu})
   });
 
-  app.get("/ram", (req, res)=>{
-    const totalRam = (os.totalmem()/1073741824).toFixed(2) //Gb
-    const useRam = ((os.totalmem() - os.freemem())/1073741824).toFixed(2) //Gb
-  
-    res.json({"totalRam": totalRam, "useRam": useRam})
-  });
+app.get("/ram", (req, res)=>{
+const totalRam = (os.totalmem()/1073741824).toFixed(2) //Gb
+const useRam = ((os.totalmem() - os.freemem())/1073741824).toFixed(2) //Gb
+
+res.json({"totalRam": totalRam, "useRam": useRam})
+});
+
+app.get('/disk', (req, res) => {
+    exec('wmic logicaldisk get size,freespace', (error, stdout)=>{
+      const disk = stdout
+      const diskInfo = disk.trim().split('\n')[1].split('  ')
+      const free = ((diskInfo[1]-diskInfo[0])/(1024*1024*1024)).toFixed(2);
+      const tot = (diskInfo[1]/(1024*1024*1024)).toFixed(2);
+      res.json({"use": free, "tot": tot})
+    })
+  })
 
 
 const port = 5000;
