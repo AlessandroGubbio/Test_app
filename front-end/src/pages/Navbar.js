@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './navbar.css'
 import { useLocation } from 'react-router-dom'
 
@@ -12,13 +12,19 @@ const Nabar = () => {
   const home = ()=>{
     if(location==="/Login" || location==="/Main"){
       window.location.reload();
+    }else if(location=== "/Info"){
+      navigate("/Main");
     }else{
       navigate('/Login')
     }
   }
+
   const logout= ()=>{
-    alert('you need to be logged in to logout')
-  }
+    if(location==="/Login"){
+      alert('you need to be logged in to logout')
+    }else{
+      navigate('/Login')
+  }}
   
   
   function Title(){
@@ -26,6 +32,8 @@ const Nabar = () => {
       return "Welcome to our site"
     }else if(location ==='/Register'){
       return "Join our family"
+    }else if(location === '/Info'){
+      return "Files Info"
     }else{
       return 'Home'
     }
@@ -39,7 +47,7 @@ const Nabar = () => {
         home
       </span>
       </a>
-      <h4 className='nav_title'>{Title()}</h4>
+      <h4 className='nav_title' style={{cursor:"default"}}>{Title()}</h4>
       <a className='logout_btn'>
       <span onClick={logout} class="material-symbols-outlined">
         logout

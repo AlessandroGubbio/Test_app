@@ -12,6 +12,8 @@
 .cards_container{
     overflow-x: scroll;
     scrollbar-width: none;
+    padding-top: 50px;
+    padding-left: 20px;
 }
 
 
@@ -24,7 +26,7 @@
 .info_container{
     width: 280px;
     height: 500px;
-    margin-left: 30px;
+    margin-left: 160px;
     box-shadow: 15px 15px 30px rgb(1, 5, 24),
     -15px -15px 30px rgb(18, 49, 151);
     border-radius: 25px;
@@ -38,14 +40,11 @@
     padding: 0 10px;
     font-size: 14px;
     margin: 0;
-    margin-top: 12px;
+    margin-top: 15px;
+    line-height: 17px;
     
 }
 
-.cards_container{
-    padding-top: 100px;
-    padding-left: 20px;
-}
 
 .card_title{
     font-family:  'Arvo', serif;
@@ -69,6 +68,7 @@
     cursor: pointer;
     color: rgb(6, 74, 192);
     transition: transform 0.3s ease-in-out, background-color 0.1s ease-in-out, border 0.1s ease-in-out;
+    border: 1px solid;
 }
 .show_btn:hover{
     transform: scale(1.1);
@@ -115,4 +115,20 @@
     color: white;
     text-align: center;
     font-size: 20px;
+}
+
+.getfile{
+    color: white;
+    margin-top: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    text-decoration: underline 0.15em rgba(0, 0, 0, 1);
+    text-underline-offset: 5px;
+    transition: text-decoration-color 0.2s ease-in-out;
+    width: 120px;
+}
+
+.getfile:hover{
+    text-decoration-color: rgb(255, 255, 255);
+    
 }

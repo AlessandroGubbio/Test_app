@@ -1,0 +1,41 @@
+.files_container{
+    display: grid;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    margin-top: 50px;
+    height: 580px;
+    margin: 50px;
+    box-shadow: 15px 15px 30px rgb(1, 5, 24),
+    -15px -15px 30px rgb(18, 49, 151);
+    border-radius: 25px;
+    border: 1px solid rgb(1, 5, 24);
+}
+.file_form{
+    margin-top: 20px;
+    margin-left: 100px;
+}
+
+.file_input{
+    width: 350px;
+}
+.file_des{
+    color: white;
+    font-family: 'Arvo', serif;
+}
+.file_btn{
+    font-family: 'Arvo', serif;
+    font-size: 11px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    width: 70px;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    transition: tranform 0.2s ease-in-out, width .5s ease;
+}
+.file_btn:hover{
+    transform: scale(1.05);
+    width: 80px;
+    background-color: rgb(0, 27, 203);
+}

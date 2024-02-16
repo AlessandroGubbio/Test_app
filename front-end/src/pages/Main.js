@@ -7,12 +7,13 @@ import ram from '../images/ram.jpg'
 import disk from '../images/disk.jpg'
 import Card from './Card'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const Main = (props) => {
 
-
+  const navigate = useNavigate()
   const [beData, setBeData] = useState(null);
   const [beRam, setBeRam] = useState(null);
   const [beDisk, setBeDisk] = useState(null);
@@ -43,10 +44,19 @@ const Main = (props) => {
       .catch(err => console.error(err));
   }, []);
 
+  const getfile =()=>{
+    navigate('/Info')
+  }
 
   return (
     <>
     <Navbar />  
+    <div className='getfile' onClick={getfile}>
+      <span class="material-symbols-outlined">
+        description
+      </span>
+      Get Info
+    </div>
     <div className='cards_container'>
       <Card img={cpu} title="The CPU" description={cpu_desc} name="cpu" click="cpu_fun" beData={beData} />
       <Card img={ram} title="The RAM" description={ram_desc} name="ram" click="ram_fun" beData={beRam}/>
