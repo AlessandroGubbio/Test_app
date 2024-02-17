@@ -3,6 +3,8 @@ const app = express()
 const os = require('os')
 const client = require('./database')
 const {exec} = require("child_process");
+const fs = require('fs');
+const path = require('path');
 const jwt = require('jsonwebtoken')
 
 app.use(express.json());
@@ -61,6 +63,7 @@ const useRam = ((os.totalmem() - os.freemem())/1073741824).toFixed(2) //Gb
 res.json({"totalRam": totalRam, "useRam": useRam})
 });
 
+// HDD API
 app.get('/disk', (req, res) => {
     exec('wmic logicaldisk get size,freespace', (error, stdout)=>{
       const disk = stdout
@@ -70,6 +73,46 @@ app.get('/disk', (req, res) => {
       res.json({"use": free, "tot": tot})
     })
   })
+
+// File API
+app.post("/readFile", (req, res)=>{
+  const file = req.body.fileName;
+  const paths = "C:/Users/agubb/Desktop/IA/"
+  const filepath = paths+file+'.txt';
+  fs.readFile(filepath, 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      res.json("file not found")
+    } else {
+      res.send(data)
+  }})
+});
+
+// Directory API
+app.post("/readDir", (req, res)=>{
+  const dir = req.body.dirName;
+  let text = []
+  console.log(dir)
+  fs.readdir(dir, 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      res.json(["directory not found"])
+    } else {
+      console.log(data);
+      for (let i in data) {
+        if (path.extname(data[i])) {
+            text.push(
+                'file : ' + data[i] 
+            );
+        } else {
+            text.push(
+                'folder : '+ data[i] 
+            )
+        }
+    }
+    res.json(text);
+  }})
+});
 
 
 const port = 5000;
