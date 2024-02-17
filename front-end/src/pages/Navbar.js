@@ -34,6 +34,8 @@ const Nabar = () => {
       return "Join our family"
     }else if(location === '/Info'){
       return "Files Info"
+    }else if(location === "/Admin"){
+      return "Admin Privileges"
     }else{
       return 'Home'
     }

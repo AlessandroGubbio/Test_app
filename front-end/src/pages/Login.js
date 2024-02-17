@@ -14,8 +14,13 @@ const Login = () => {
 
   const verify = async()=>{
     try {
-      await axios.post("/login", {username, password})
-        navigate("/Main")
+      await axios.post("/login", {username, password}).then((res) => {
+        if(res.data.message.includes('Login successful')){
+          navigate("/Main")
+        }else{
+          navigate("/Admin")
+        }
+      })
     } catch (err) {
       console.log(err)
     }

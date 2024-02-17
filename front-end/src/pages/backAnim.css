@@ -1,7 +1,7 @@
 .back_anim{
     z-index: -1;
-    width: 700px;
-    height: 700px;
+    width: 800px;
+    height: 800px;
     background-color: rgb(20, 28, 171);
     position: absolute;
     bottom: -30%;
@@ -13,8 +13,8 @@
 }
 .back_anim_2{
     z-index: -1;
-    width: 750px;
-    height: 750px;
+    width: 850px;
+    height: 850px;
     background-color: rgb(16, 25, 207);
     position: absolute;
     bottom: -35%;
@@ -26,8 +26,8 @@
 }
 .back_anim_3{
     z-index: -1;
-    width: 800px;
-    height: 800px;
+    width: 900px;
+    height: 900px;
     background-color: rgb(25, 36, 235);
     position: absolute;
     bottom: -40%;
