@@ -29,6 +29,31 @@ app.post('/login', async (req, res) => {
     }
   });
 
+  // Update with mail
+app.post('/signup', async (req, res) => {
+  try {
+      const {username, password} = req.body;
+
+      client.query("INSERT INTO users (username, password) VALUES($1, $2)", [username, password]);
+  } catch (error) {
+      console.error('Error during sign up:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
+// Admin Account show
+app.get('/admin', (req, res) =>{
+  const query = client.query("SELECT * FROM users");
+  query.then(result => {
+    res.json(result.rows);
+  }).catch(error => {
+    console.error(error);
+    res.status(500).json(['Error executing query']);
+  });
+});
+
+
 
 
 // APIs

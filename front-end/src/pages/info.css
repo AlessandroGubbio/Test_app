@@ -2,7 +2,6 @@
     display: grid;
     overflow-y: scroll;
     scrollbar-width: none;
-    margin-top: 50px;
     height: 580px;
     margin: 50px;
     box-shadow: 15px 15px 30px rgb(1, 5, 24),

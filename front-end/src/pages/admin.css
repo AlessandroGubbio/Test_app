@@ -1,0 +1,49 @@
+.users_info{
+    overflow-y: scroll;
+    scrollbar-width: none;
+    height: 480px;
+    margin: 50px;
+    box-shadow: 15px 15px 30px rgb(1, 5, 24),
+    -15px -15px 30px rgb(18, 49, 151);
+    border-radius: 25px;
+    border: 1px solid rgb(1, 5, 24);
+    padding: 50px;
+    color: white;
+}
+.btn_users{
+    font-size: 15px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    width: 150px;
+    color: white;
+    border: 1px solid white;
+    background-color: rgb(2, 8, 51);
+    transition: tranform 0.2s ease-in-out, width .5s ease;
+}
+.btn_users:hover{
+    transform: scale(1.05);
+    width: 180px;
+    background-color: rgb(0, 27, 203);
+}
+.users_div{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 800px;
+    box-shadow: 15px 15px 30px rgb(1, 5, 24);
+    backdrop-filter: brightness(1.2);
+    border-radius: 25px;
+    word-spacing: 7px;
+}
+.div_users{
+    width: 300px;
+}
+.div_user_info{
+    display: flex;
+}
+.list_users{
+    list-style: decimal;
+    line-height: 1.5;
+}
