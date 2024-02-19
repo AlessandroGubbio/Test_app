@@ -45,7 +45,7 @@ const Info = () => {
         <div className='files_container'>
             <div className='file_form'>
                 <p className='file_des'>- Type the name of a File you'd like to know the contents of (text files) </p>
-                <input className='file_input' type='text' placeholder='File name' value={fileName} onChange={(e)=>setfileName(e.target.value)}></input>
+                <input  className='form_input' type='text' placeholder='File name' value={fileName} onChange={(e)=>setfileName(e.target.value)}></input>
                 <button className='file_btn' onClick={readFile}>SUBMIT</button>
                 {hide && beFile && ( 
                 <div className='file_box'>
@@ -58,7 +58,7 @@ const Info = () => {
             </div>
             <div className='file_form'>
                 <p className='file_des'>- Type the name of a Directory you'd like to know the contents of (C:\\Users\\agubb\\ + directory path)</p>
-                <input className='file_input' type='text' placeholder='Directory name' value={dirName} onChange={(e)=>setdirName(e.target.value)}></input>
+                <input className='form_input' type='text' placeholder='Directory name' value={dirName} onChange={(e)=>setdirName(e.target.value)}></input>
                 <button className='file_btn' onClick={readDir}>SUBMIT</button>
                 {hideDir && beDir && ( 
                 <div className='file_box'>

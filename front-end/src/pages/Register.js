@@ -10,6 +10,22 @@ const Register = () => {
     const [password, setPassword] = useState('')
     const [mail, setMail] = useState('')
     const navigate = useNavigate()
+    const [error, setError] = useState("")
+
+    const register = async () =>{
+      try {
+        axios.post("/signup", {username, mail, password}).then(()=>{
+          navigate('/Main')
+        }
+        )
+        .catch(err => {
+          setError('Username not available. Please try a different one')
+          console.log(err);
+        });
+      } catch (err) {
+        console.log(err)
+      }
+    }
 
       
     return (
@@ -21,24 +37,25 @@ const Register = () => {
               <div className='title'>
                 <h1>Sign Up</h1>
               </div>
+              <p style={{color: 'red'}}>{error}</p>
               <div className='form'>
               <span class="material-symbols-outlined">
                 person
                 </span>
-                <input type='text' value={username} placeholder='Username' onChange={(e) => setUsername(e.target.value)}></input>
+                <input className='form_input' type='text' value={username} placeholder='Username' onChange={(e) => setUsername(e.target.value)}></input>
                 <br/>
                 <span class="material-symbols-outlined">
                 mail
                 </span>
-                <input type='text' value={mail} placeholder='Email' onChange={(e) => setMail(e.target.value)}></input>
+                <input className='form_input' type='text' value={mail} placeholder='Email' onChange={(e) => setMail(e.target.value)}></input>
                 <br/>
                 <span class="material-symbols-outlined">
                 lock
                 </span>
-                <input type='password' value={password} placeholder='Password' onChange={(e) => setPassword(e.target.value)}></input>
+                <input className='form_input' type='password' value={password} placeholder='Password' onChange={(e) => setPassword(e.target.value)}></input>
               </div> 
               <div>
-                <button className='submit_button'>Submit</button>
+                <button className='submit_button' onClick={register}>Submit</button>
               </div> 
                  
           </div>

@@ -29,12 +29,11 @@ app.post('/login', async (req, res) => {
     }
   });
 
-  // Update with mail
+
 app.post('/signup', async (req, res) => {
   try {
-      const {username, password} = req.body;
-
-      client.query("INSERT INTO users (username, password) VALUES($1, $2)", [username, password]);
+      const {username, mail, password} = req.body;
+      client.query("INSERT INTO users (username, password, email) VALUES($1, $2, $3)", [username, password, mail]);
   } catch (error) {
       console.error('Error during sign up:', error);
       res.status(500).json({ success: false, message: 'Internal Server Error' });
@@ -52,6 +51,35 @@ app.get('/admin', (req, res) =>{
     res.status(500).json(['Error executing query']);
   });
 });
+
+// update account
+app.post('/update', async (req,res)=>{
+  try {
+    const {username, mail, password, n_user, n_mail, n_pass} = req.body;
+    const validateUser = await client.query("UPDATE users SET username=$1, password=$2, email=$3 WHERE username=$4 AND email=$5 AND password=$6" 
+    , [n_user, n_mail, n_pass, username, mail, password]);
+    if(validateUser.rowCount > 0){
+      res.json({ success: true, message: 'Modification successful' });
+    }else{
+      res.status(401).json({ success: false, message: 'Invalid username or password' });
+    }
+  } catch (error) {
+    console.error('Error modifying info:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
+// delete user
+app.post('/delete', async (req, res)=>{
+  try {
+    const {username} = req.body;
+    client.query("DELETE FROM users WHERE username = $1", [username])
+  } catch (error) {
+    console.error('Error deleting user:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+})
+
 
 
 
