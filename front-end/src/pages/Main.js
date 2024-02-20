@@ -44,6 +44,13 @@ const Main = (props) => {
       .catch(err => console.error(err));
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem('auth-token');
+    if (!token) {
+        navigate('/Login');
+    }
+  });
+
   const getfile =()=>{
     navigate('/Info')
   }

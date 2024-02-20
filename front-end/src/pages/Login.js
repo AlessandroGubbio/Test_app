@@ -16,12 +16,23 @@ const Login = () => {
   const verify = async()=>{
     try {
       await axios.post("/login", {username, password}).then((res) => {
-        if(res.data.message.includes('Login successful')){
-          navigate("/Main")
-        }else{
-          navigate("/Admin")
+        const {data} = res
+        if(data){
+          if(data.message){
+            navigate("/Admin")
+          }else{
+            localStorage.setItem("auth-token", data);
+            axios.defaults.headers.common['auth-token'] = data.token;
+            navigate('/Main')
+          }
         }
-      }).catch(err => {
+      }
+        // if(res.data.message.includes('admin')){
+        //   navigate("/Admin")
+        // }else{
+        //   navigate("/Main")
+        // }
+      ).catch(err => {
         setError('Username or password error')
         console.log(err)
       })

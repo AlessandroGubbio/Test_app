@@ -23,6 +23,7 @@ const Nabar = () => {
     if(location==="/Login"){
       alert('you need to be logged in to logout')
     }else{
+      localStorage.removeItem("auth-token")
       navigate('/Login')
   }}
   
