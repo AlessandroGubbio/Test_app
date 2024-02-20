@@ -39,12 +39,12 @@ const Login = () => {
     <>
     <Navbar/>
     <div className='login'>
-      <p style={{color: 'rgb(255, 0, 55)'}}>{error}</p>
       <div className='container'>
         <div className='card'>
             <div className='title'>
               <h1>Sign In</h1>
             </div>
+            <p style={{color: 'rgb(255, 0, 55)'}}>{error}</p>
             <div className='form'>
               <span class="material-symbols-outlined">
               person

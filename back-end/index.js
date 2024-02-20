@@ -7,6 +7,9 @@ const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken')
 
+// import routes
+const AuthRoute = require('./auth/authentication');
+
 app.use(express.json());
 
 // CRUD operations
@@ -169,6 +172,8 @@ app.post("/readDir", (req, res)=>{
     res.json(text);
   }})
 });
+
+
 
 
 const port = 5000;

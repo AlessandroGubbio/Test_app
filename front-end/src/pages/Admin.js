@@ -133,7 +133,7 @@ const Admin = () => {
         <br/>  
         {hideU &&(
           <>
-          <p className='update_description'>Insert the new user Information</p>
+          <p className='update_description'>Insert the NEW user Information</p>
           <div className='new_info'>
             <input className='username_input'placeholder='New Username' value={n_user} onChange={(e) => setN_user(e.target.value)}></input>
             <input className='username_input'placeholder='New Email' value={n_mail} onChange={(e) => setN_Mail(e.target.value)}></input>
