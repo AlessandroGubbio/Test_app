@@ -6,14 +6,16 @@ const {exec} = require("child_process");
 const fs = require('fs');
 const path = require('path');
 const jwt = require('jsonwebtoken')
+const verify = require('./auth/verifyToken')
 
 // import routes
 const AuthRoute = require('./auth/authentication');
 
 app.use(express.json());
 
-// CRUD operations
 
+
+// CRUD operations
 app.post('/login', async (req, res) => {
     try {
         const {username, password} = req.body;
@@ -22,7 +24,16 @@ app.post('/login', async (req, res) => {
         }else{
         const validateUser = client.query("SELECT username, password FROM users WHERE username = $1 AND password = $2", [username, password]);
         if ((await validateUser).rows.length > 0) {
-            res.send({ success: true, message: 'Login successful' });
+
+
+
+          // Token
+          const token = jwt.sign({username}, process.env.SECRET_KEY , { expiresIn: "1h"});
+          res.header('auth-token', token).send({success: true, token: token })
+          //res.send({ success: true, message: 'Login successful', token: token });
+
+
+
         } else {
             res.status(401).json({ success: false, message: 'Invalid username or password' });
         }}
@@ -92,7 +103,7 @@ app.get('/', (req, res)=>{
     res.send("Welcome to the User API")
   })
   
-app.get("/cpu", (req, res)=>{
+app.get("/cpu", verify, (req, res)=>{
 
     const numberCpus = os.availableParallelism()
   
@@ -115,7 +126,7 @@ app.get("/cpu", (req, res)=>{
     res.json({"numberCpu": numberCpus, "totCpus": totalCpu, "cpuUsage": usedCpu})
   });
 
-app.get("/ram", (req, res)=>{
+app.get("/ram",  verify, (req, res)=>{
 const totalRam = (os.totalmem()/1073741824).toFixed(2) //Gb
 const useRam = ((os.totalmem() - os.freemem())/1073741824).toFixed(2) //Gb
 
@@ -123,7 +134,7 @@ res.json({"totalRam": totalRam, "useRam": useRam})
 });
 
 // HDD API
-app.get('/disk', (req, res) => {
+app.get('/disk', verify, (req, res) => {
     exec('wmic logicaldisk get size,freespace', (error, stdout)=>{
       const disk = stdout
       const diskInfo = disk.trim().split('\n')[1].split('  ')
