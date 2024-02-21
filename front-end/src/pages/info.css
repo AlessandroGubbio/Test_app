@@ -15,7 +15,8 @@
     padding-bottom: 30px;
 }
 
-.file_input{
+.form_input{
+    margin-top: 20px;
     width: 350px;
 }
 .file_des{

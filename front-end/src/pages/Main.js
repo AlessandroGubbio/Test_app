@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const Main = (props) => {
+const Main = () => {
 
   const navigate = useNavigate()
   const [beData, setBeData] = useState(null);
